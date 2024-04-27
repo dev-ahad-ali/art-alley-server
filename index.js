@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 
 //config
 require('dotenv').config();
@@ -39,6 +39,12 @@ async function run() {
 
         app.get('/allArts', async (req, res) => {
             const result = await artCollection.find().toArray();
+            res.send(result);
+        });
+        app.get('/allArts/:_id', async (req, res) => {
+            const result = await artCollection.findOne({
+                _id: new ObjectId(req.params._id),
+            });
             res.send(result);
         });
 
