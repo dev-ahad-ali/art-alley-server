@@ -56,6 +56,15 @@ async function run() {
             res.send(result);
         });
 
+        app.get('/subcategory/:category', async (req, res) => {
+            const result = await artCollection
+                .find({
+                    subcategory: req.params.category,
+                })
+                .toArray();
+            res.send(result);
+        });
+
         console.log(
             'Pinged your deployment. You successfully connected to MongoDB!'
         );
