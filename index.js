@@ -41,10 +41,18 @@ async function run() {
             const result = await artCollection.find().toArray();
             res.send(result);
         });
+
         app.get('/allArts/:_id', async (req, res) => {
             const result = await artCollection.findOne({
                 _id: new ObjectId(req.params._id),
             });
+            res.send(result);
+        });
+
+        app.get('/myArt/:email', async (req, res) => {
+            const result = await artCollection
+                .find({ email: req.params.email })
+                .toArray();
             res.send(result);
         });
 
