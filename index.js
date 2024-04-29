@@ -65,6 +65,26 @@ async function run() {
             res.send(result);
         });
 
+        app.patch('/update/:_id', async (req, res) => {
+            const data = req.body;
+            const filter = { _id: new ObjectId(req.params._id) };
+            const updateArt = {
+                $set: {
+                    imageUrl: data.imageUrl,
+                    itemName: data.itemName,
+                    subcategory: data.subcategory,
+                    description: data.description,
+                    price: data.price,
+                    rating: data.rating,
+                    processTime: data.processTime,
+                    customization: data.customization,
+                    stockStatus: data.stockStatus,
+                },
+            };
+            const result = await artCollection.updateOne(filter, updateArt);
+            res.send(result);
+        });
+
         console.log(
             'Pinged your deployment. You successfully connected to MongoDB!'
         );
