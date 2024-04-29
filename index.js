@@ -85,6 +85,13 @@ async function run() {
             res.send(result);
         });
 
+        app.delete('/delete/:_id', async (req, res) => {
+            const _id = req.params._id;
+            const query = { _id: new ObjectId(_id) };
+            const result = await artCollection.deleteOne(query);
+            res.send(result);
+        });
+
         console.log(
             'Pinged your deployment. You successfully connected to MongoDB!'
         );
